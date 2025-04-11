@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Destination To Media !!</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://images3.alphacoders.com/139/1391786.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffdd57;
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+      display: block;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      font-size: 16px;
+      color: #333;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #ff7e5f;
+      box-shadow: 0 0 10px rgba(255, 126, 95, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #feb47b, #ff7e5f);
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      color: #ffdd57;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Login to Destination To Media !!</h1>
+
+    <form id="login-form">
+      <label for="login-username">Username:</label>
+      <input type="text" id="login-username" required>
+
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" required>
+
+      <button type="button" onclick="login()">Login</button>
+
+      <div class="error" id="error-message"></div>
+    </form>
+
+    <a href="register.html" class="back-link">Don't have an account? Register here</a>
+  </div>
+
+  <script>
+    // Store hardcoded user (username: harsha, password: harshu123)
+    if (!localStorage.getItem("harsha1")) {
+      const userData = {
+        username: "harsha1",
+        password: "harshu123"
+      };
+      localStorage.setItem("harsha1", JSON.stringify(userData));
+    }
+
+    function login() {
+      const username = document.getElementById("login-username").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const errorMsg = document.getElementById("error-message");
+
+      const storedUser = JSON.parse(localStorage.getItem(username));
+
+      if (storedUser && storedUser.password === password) {
+        sessionStorage.setItem("userLoggedIn", "true");
+        sessionStorage.setItem("currentUser", username);
+        alert("Login successful!");
+        window.location.href = "index.html"; // redirect to home
+      } else {
+        errorMsg.textContent = "Incorrect username or password.";
+      }
+    }
+  </script>
+
+</body>
+</html>
